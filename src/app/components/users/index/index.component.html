@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Usuarios</h1>
+
+  <div class="row mb-3 mt-3">
+    <div class="col-sm-2">
+      <a [routerLink]="['/users/new']" type="button" class="btn btn-primary">Nuevo usuario</a>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Codigo empleado</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Usuario</th>
+        <th>Rol</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.employee.employeeCode }}</td>
+        <td>{{ user.employee.firstName }}</td>
+        <td>{{ user.employee.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role.role }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

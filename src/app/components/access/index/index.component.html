@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Accessos</h1>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Usuario</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Fecha/Hora</th>
+      <th>Acceso</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let access of accesses">
+      <td>{{ access.id }}</td>
+      <td>{{ access.user.username }}</td>
+      <td>{{ access.user.employee.firstName }}</td>
+      <td>{{ access.user.employee.lastName }}</td>
+      <td>{{ access.createdAt }}</td>
+      <td>{{ access.accessType.type }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

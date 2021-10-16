@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="container">
+
+  <div class="col-sm-8 offset-sm-2">
+  <h1>Nuevo usuario</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" formControlName="username" id="username" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" formControlName="password" id="password">
+      </div>
+      <div class="mb-3">
+        <label for="employeeCode" class="form-label">Codigo empleado</label>
+        <input type="text" formControlName="employeeCode" id="employeeCode" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Nombre</label>
+        <input type="text" formControlName="firstName" id="firstName" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input type="text" formControlName="lastName" id="lastName" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Rol</label>
+        <select class="form-select" name="role" id="role" formControlName="role">
+          <option *ngFor="let role of roles" [value]="role.id">{{ role.role }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+
+</div>
