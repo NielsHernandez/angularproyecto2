@@ -5,6 +5,8 @@ import {UserService} from "../../../services/user.service";
 import {User} from "../../../models/user";
 import {Role} from "../../../models/role";
 import {Router} from "@angular/router";
+import {DepartmentService} from "../../../services/department.service";
+import {Department} from "../../../models/department";
 
 @Component({
   selector: 'app-create',
@@ -14,11 +16,13 @@ import {Router} from "@angular/router";
 export class CreateComponent implements OnInit {
 
   public roles: Role[] | null = [];
+  public departments: Department[] | null = [];
   public form: FormGroup;
 
   constructor(private rolService: RolService,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private departmentService: DepartmentService) {
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
@@ -26,16 +30,17 @@ export class CreateComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
+      department: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit(): void {
     this.rolService.getAll().subscribe(response => {
-      this.roles = response.body;
+      this.roles = response;
+    });
 
-      if (response.status == 403) {
-        localStorage.removeItem('token');
-      }
+    this.departmentService.getAll().subscribe(response => {
+      this.departments = response;
     });
   }
 
@@ -45,6 +50,10 @@ export class CreateComponent implements OnInit {
       employeeCode: this.form.value.employeeCode,
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
+      department: {
+        id: this.form.value.department,
+        name: ''
+      }
     };
 
     let user: User = {

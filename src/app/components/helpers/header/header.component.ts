@@ -9,12 +9,18 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
   public isLogged: boolean = false;
+  public isAdmin: boolean = false;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') != undefined || localStorage.getItem('token') != null) {
       this.isLogged = true;
+    }
+    if (localStorage.getItem('role') != undefined || localStorage.getItem('role') != null) {
+      if (localStorage.getItem('role') == "ADMIN") {
+        this.isAdmin = true;
+      }
     }
   }
 

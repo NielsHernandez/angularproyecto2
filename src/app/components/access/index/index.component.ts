@@ -17,17 +17,35 @@ export class IndexComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.accessService.getAll().subscribe(res => {
-      console.log("hola")
-      console.log(res.status)
-      if (res.status == 403) {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-      }
+    if (localStorage.getItem('role') === 'ADMIN') {
+      this.accessService.getAll().subscribe(res => {
+        console.log("hola")
+        console.log(res.status)
+        if (res.status == 403) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
 
-      this.accesses = res.body;
-      console.log(this.accesses);
-    });
+        this.accesses = res.body;
+        console.log(this.accesses);
+      });
+    } else {
+      console.log("I-m here")
+      const user = localStorage.getItem('id');
+      console.log("user", user);
+      this.accessService.getAllByUser(typeof user === "string" ? user : "0").subscribe(res => {
+        console.log("hola")
+        console.log(res.status)
+        if (res.status == 403) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
+
+        this.accesses = res.body;
+        console.log(this.accesses);
+      });
+    }
+
   }
 
 }

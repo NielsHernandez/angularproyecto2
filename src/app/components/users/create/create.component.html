@@ -31,6 +31,12 @@
           <option *ngFor="let role of roles" [value]="role.id">{{ role.role }}</option>
         </select>
       </div>
+      <div class="mb-3">
+        <label for="department" class="form-label">Departamento</label>
+        <select class="form-select" name="department" id="department" formControlName="department">
+          <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
   </div>

@@ -8,6 +8,8 @@ import {Access} from "../models/access";
 })
 export class AccessService {
 
+  // 643611153022-8eq0reu9vioi50rfuf6k0bjmjl5r1j06.apps.googleusercontent.com
+  // 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
   private apiurl = 'http://localhost:8080/accesses';
   private httpOptions = {
     observe: 'response' as 'response',
@@ -22,6 +24,11 @@ export class AccessService {
 
   public getAll(): Observable<HttpResponse<Access[]>> {
     return this.httpClient.get<Access[]>(this.apiurl, this.httpOptions);
+  }
+
+  public getAllByUser(user: string): Observable<HttpResponse<Access[]>> {
+    const url = `${this.apiurl}/user/${user}`;
+    return this.httpClient.get<Access[]>(url, this.httpOptions);
   }
 
 }

@@ -10,10 +10,13 @@
           <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/home']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/users']">Usuarios</a>
+          <a class="nav-link" *ngIf="isAdmin" [routerLinkActive]="['active']" [routerLink]="['/users']">Usuarios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/access']">Accesos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isAdmin" [routerLinkActive]="['active']" [routerLink]="['/reports']">Reportes</a>
         </li>
         <li class="nav-item" *ngIf="isLogged">
           <a class="nav-link" (click)="logout()">Salir</a>

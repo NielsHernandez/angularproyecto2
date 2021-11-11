@@ -11,6 +11,8 @@ import {IndexComponent as AccessIndexComponent} from "./components/access/index/
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from "./components/main/login/login.component";
+import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
+import { ListComponent } from './components/reports/list/list.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +22,31 @@ import {LoginComponent} from "./components/main/login/login.component";
     UserCreateComponent,
     UserIndexComponent,
     AccessIndexComponent,
-    LoginComponent
+    LoginComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('643611153022-8eq0reu9vioi50rfuf6k0bjmjl5r1j06.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

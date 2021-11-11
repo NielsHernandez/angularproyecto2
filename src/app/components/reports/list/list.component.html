@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="container">
+
+  <div class="col-sm-8 offset-sm-2">
+    <h1>Reportes</h1>
+
+
+    <form>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="mb-3">
+            <label for="role" class="form-label">Reporte</label>
+            <select [(ngModel)]="report" class="form-select" name="role" id="role">
+              <option *ngFor="let report of reports" [value]="report.id">{{ report.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4"  *ngIf="report == '3'">
+          <div class="mb-3">
+            <label for="user" class="form-label">Employee</label>
+            <select [(ngModel)]="user" class="form-select" name="user" id="user">
+              <option *ngFor="let user of users" [value]="user.id">{{ user.employee.firstName + ' ' +
+                user.employee.lastName }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-4" *ngIf="report == '1'">
+          <div class="mb-3">
+            <label for="department" class="form-label">Departamento</label>
+            <select [(ngModel)]="department" class="form-select" name="department" id="department">
+              <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <button (click)="generate()" class="btn btn-primary">Generar</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
